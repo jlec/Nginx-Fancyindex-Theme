@@ -60,7 +60,12 @@ if (!!(window.history && history.pushState)) {
       var div = document.createElement('div');
       div.innerHTML = req.responseText;
       var elements = div.getElementsByClassName('box-content')[0];
-      target.innerHTML = elements.innerHTML;
+      if (elements) {
+        target.innerHTML = elements.innerHTML;
+      } else {
+        window.location.replace(href);
+        return false;
+      }      
       initHistory();
       return true;
     // Terrible error catching implemented! Basically, if the ajax request fails
